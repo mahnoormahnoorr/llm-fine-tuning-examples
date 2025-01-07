@@ -10,7 +10,7 @@
 
 module purge
 module use /appl/local/csc/modulefiles/
-module load pytorch/2.4
+module load pytorch/2.5
 
 # This will store all the Hugging Face cache such as downloaded models
 # and datasets in the project's scratch folder
