@@ -136,7 +136,8 @@ if __name__ == "__main__":
         args.model,
         quantization_config=quantization_config,
         torch_dtype=torch.bfloat16,
-        device_map=device
+        device_map=device,
+        # attn_implementation="flash_attention_2",
         )
 
     if args.peft:
@@ -254,6 +255,9 @@ if __name__ == "__main__":
 
     trainer.train(resume_from_checkpoint=args.resume)
 
+    if trainer.is_fsdp_enabled:
+        trainer.accelerator.state.fsdp_plugin.set_state_dict_type("FULL_STATE_DICT")
+    trainer.save_model(output_dir)
     if rank == 0:
         print()
-        print("Training done, you can find all the model checkpoints in", output_dir)
+        print("Training done, you can find the final model (and checkpoints) in", output_dir)
