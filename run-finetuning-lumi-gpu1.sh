@@ -29,9 +29,9 @@ export TOKENIZERS_PARALLELISM=false
 
 set -xv  # print the command so that we can verify setting arguments correctly from the logs
 
-srun torchrun --standalone \
+srun singularity exec "$SIF" torchrun --standalone \
      --nnodes=1 \
-     --nproc-per-node=1 \
+     --nproc_per_node=1 \
      finetuning.py $* \
      --output-path $OUTPUT_DIR \
      --num-workers $SLURM_CPUS_PER_TASK
