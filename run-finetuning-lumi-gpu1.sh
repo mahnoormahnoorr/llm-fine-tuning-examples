@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --account=project_462000007
+#SBATCH --account=project_xxxxxxxxx
 #SBATCH --partition=dev-g
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=7
@@ -8,8 +8,11 @@
 #SBATCH --gpus-per-node=1
 
 module purge
-module use /appl/local/csc/modulefiles/
-module load pytorch/2.5
+module use /appl/local/laifs/modules
+module load lumi-aif-singularity-bindings
+
+export SIF=/appl/local/laifs/containers/lumi-multitorch-u24r70f21m50t210-20260415_130625/lumi-multitorch-full-u24r70f21m50t210-20260415_130625.sif
+
 
 # This will store all the Hugging Face cache such as downloaded models
 # and datasets in the project's scratch folder
