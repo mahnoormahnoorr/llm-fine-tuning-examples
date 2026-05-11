@@ -27,6 +27,10 @@ mkdir -p $OUTPUT_DIR
 # want to retain direct control of parallelism options.
 export TOKENIZERS_PARALLELISM=false
 
+# Disable Weights & Biases logging
+export WANDB_DISABLED=true
+export WANDB_MODE=disabled
+
 set -xv  # print the command so that we can verify setting arguments correctly from the logs
 
 srun singularity exec "$SIF" torchrun --standalone \
